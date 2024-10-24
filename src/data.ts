@@ -71,7 +71,7 @@ export const skills = [
 
 export const experience: Experiencetype[] = [
   {
-    company: " Drishya Ai",
+    company: " Drishya AI",
     duration: "Sep 2024 - Present",
     role: "Software Intern",
     tasks: [

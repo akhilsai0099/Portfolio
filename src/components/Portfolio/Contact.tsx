@@ -10,6 +10,8 @@ import { Github, Linkedin, Mail, MessageCircle, Twitter } from "lucide-react";
 import Link from "next/link";
 import { GradientText } from "../ui/gradient-text";
 import GlowingCard from "./GlowingCard";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const socialLinks = [
   {
@@ -49,6 +51,8 @@ export default function Contact({
 }: {
   contactRef: React.RefObject<HTMLElement>;
 }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
   return (
     <section ref={contactRef} className="mb-16">
       <Card className="w-full max-w-2xl h-full mx-auto border-none bg-transparent backdrop-blur">
@@ -63,7 +67,7 @@ export default function Contact({
         </CardHeader>
         <CardContent className="space-y-8">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-800 rounded-lg p-6">
-            <p className="text-white leading-relaxed">
+            <p className="text-white leading-relaxed text-justify">
               Whether you&apos;re interested in collaboration, have a project in
               mind, or just want to say hello, I&apos;d love to hear from you.
               I&apos;m particularly passionate about web development, open
@@ -77,23 +81,46 @@ export default function Contact({
             {socialLinks.map((link, index) => {
               const Icon = link.icon;
               return (
-                <GlowingCard
+                <motion.div
                   key={index}
-                  className="rounded-lg flex w-[calc(50%-0.5rem)] min-w-[240px] max-w-[300px] items-center justify-start p-4 text-center bg-[rgba(30,30,30,0.5)] backdrop-blur-md border-gray-800 text-white"
+                  ref={ref}
+                  animate={isInView ? "visible" : "hidden"}
+                  variants={{
+                    hidden: { opacity: 0, x: index % 2 === 0 ? -50 : 50 },
+                    visible: {
+                      opacity: 1,
+                      x: 0,
+                      transition: {
+                        delay: 0.2 * index,
+                        duration: 0.2,
+                      },
+                    },
+                  }}
+                  transition={{
+                    damping: 10,
+                    stiffness: 100,
+                  }}
+                  className="w-[calc(50%-0.5rem)]"
                 >
-                  <Link
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center space-x-4"
-                  >
-                    <Icon className="h-5 w-5 flex-shrink-0" />
-                    <div className="flex flex-col items-start">
-                      <span className="font-medium">{link.name}</span>
-                      <span className="text-sm ">{link.username}</span>
-                    </div>
-                  </Link>
-                </GlowingCard>
+                  <GlowingCard className="rounded-lg flex w-full h-full items-center justify-start p-4 text-center bg-[rgba(30,30,30,0.5)] backdrop-blur-md border-gray-800 text-white">
+                    <Link
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="grid grid-cols-1 md:grid-cols-[auto_1fr] items-center justify-center w-full"
+                    >
+                      <div className="flex items-center justify-center">
+                        <Icon className="h-5 w-5 flex-shrink-0 " />
+                      </div>
+                      <div className="flex flex-col w-full justify-start overflow-hidden">
+                        <span className="font-medium">{link.name}</span>
+                        <span className="text-sm truncate w-full">
+                          {link.username}
+                        </span>
+                      </div>
+                    </Link>
+                  </GlowingCard>
+                </motion.div>
               );
             })}
           </div>

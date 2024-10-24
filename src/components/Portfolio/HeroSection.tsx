@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GradientText } from "@/components/ui/gradient-text";
+import JellyBlob from "../ui/JellyBlob";
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/akhilsai0099" },
@@ -27,13 +28,15 @@ export function HeroSection({
   aboutRef: React.RefObject<HTMLElement>;
 }) {
   return (
-    <div className="relative min-h-[calc(100vh-72px)] flex flex-col items-center justify-center px-4 overflow-hidden">
+    <div className="relative min-h-[calc(100svh-72px)] flex flex-col items-center justify-center px-4 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20" />
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
 
       <div className="absolute top-1/4 -left-32 w-96 h-96 bg-blue-500/30 rounded-full blur-3xl animate-pulse" />
       <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-purple-500/30 rounded-full blur-3xl animate-pulse delay-1000" />
+
+      {/* <JellyBlob /> */}
 
       {/* <div
         className="absolute inset-0 opacity-10"
@@ -46,7 +49,7 @@ export function HeroSection({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="relative text-center space-y-6 max-w-3xl"
+        className="relative text-center space-y-6 max-w-3xl z-10"
       >
         <div className="flex justify-center mb-6">
           <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg">

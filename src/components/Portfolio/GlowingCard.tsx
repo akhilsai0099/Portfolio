@@ -3,9 +3,14 @@ import { Card } from "../ui/card";
 
 interface GlowingCardProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode; // Ensure children prop is included
+  glowCardStyle?: string;
 }
 
-const GlowingCard: React.FC<GlowingCardProps> = ({ children, ...props }) => {
+const GlowingCard: React.FC<GlowingCardProps> = ({
+  children,
+  glowCardStyle,
+  ...props
+}) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
@@ -27,7 +32,7 @@ const GlowingCard: React.FC<GlowingCardProps> = ({ children, ...props }) => {
     >
       {children}
       <div
-        className="absolute inset-0 transition-opacity duration-300 pointer-events-none"
+        className={`absolute inset-0 transition-opacity duration-300 pointer-events-none ${glowCardStyle}`}
         style={{
           opacity: isHovered ? 1 : 0,
           background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.1) 0%, transparent 50%)`,
