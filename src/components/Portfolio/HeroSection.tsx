@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { GradientText } from "@/components/ui/gradient-text";
 import { motion } from "framer-motion";
 import {
   ArrowDown,
@@ -9,9 +11,6 @@ import {
   Mail,
   Twitter,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { GradientText } from "@/components/ui/gradient-text";
-import JellyBlob from "../ui/JellyBlob";
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/akhilsai0099" },

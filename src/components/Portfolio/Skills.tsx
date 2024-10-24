@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
-import GlowingCard from "./GlowingCard";
 import { skills } from "@/data";
-import { motion, useInView, useAnimation } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import React, { useRef } from "react";
 import { GradientText } from "../ui/gradient-text";
+import GlowingCard from "./GlowingCard";
 
 const Skills = ({ skillsRef }: { skillsRef: React.RefObject<HTMLElement> }) => {
   const ref = useRef<HTMLDivElement>(null);
